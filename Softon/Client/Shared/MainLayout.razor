@@ -1,0 +1,50 @@
+﻿@using Dodo.BlazorThemeSwitcher;
+@inherits LayoutComponentBase
+@inject ThemeManager TM
+@inject IDialogService nav
+@inject IModalService modal
+@inject Blazored.LocalStorage.ILocalStorageService local
+<MudThemeProvider @ref="@_mudThemeProvider" @bind-IsDarkMode="@_isDarkMode" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+<div class="back" style="background-image:url(@back)">
+    <NavMenu />
+    @Body
+</div>
+@code {
+    string back = "";
+    private bool _isDarkMode;
+    private MudThemeProvider? _mudThemeProvider;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _isDarkMode = await _mudThemeProvider!.GetSystemPreference();
+            StateHasChanged();
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        if (string.IsNullOrEmpty(await local.GetItemAsync<string>("back")))
+        {
+            back = "https://cdn.pixabay.com/photo/2016/06/17/06/04/background-1462755_1280.jpg";
+            StateHasChanged();
+        }
+        else
+        {
+            back = await local.GetItemAsync<string>("back");
+            StateHasChanged();
+        }
+    }
+}

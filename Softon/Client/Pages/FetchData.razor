@@ -1,0 +1,57 @@
+﻿@page "/fetchdata"
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using Softon.Shared
+@inject NavigationManager nav
+@inject HttpClient Http
+@inject Blazored.LocalStorage.ILocalStorageService local
+<PageTitle>Weather forecast</PageTitle>
+
+<MudTabs PanelClass="pa-6">
+    <MudTabPanel Text="Personalization" Icon="@Icons.Material.Filled.Draw">
+        <div class="row">
+            <div class="d-flex m-1">
+                <input @bind="back" placeholder="Search Wallpaper" />
+                <InputFile hidden id="upload" OnChange="Upload" />
+                <label for="upload" class="ms-2 my-auto"><MudIcon Icon="@Icons.Material.Filled.ImageSearch" /></label>
+            </div>
+            @if (!string.IsNullOrEmpty(back))
+            {
+                <div class="d-flex justify-content-center">
+                    <img class="w-25 rounded" src="@back" />
+                </div>
+            }
+            <div class="d-flex my-1 justify-content-between">
+                <label>Theme</label>
+                <input type="checkbox" />
+            </div>
+            <div class="d-flex justify-content-between">
+                <label>Language</label>
+                <select>
+                    <option>Spanish</option>
+                    <option>English</option>
+                </select>
+            </div>
+        </div>
+    </MudTabPanel>
+    <MudTabPanel Text="Account" Icon="@Icons.Material.Filled.AccountCircle" OnClick="account" />
+</MudTabs>
+@code {
+    string back = "";
+    private async void Upload(InputFileChangeEventArgs e)
+    {
+        foreach (var file in e.GetMultipleFiles(int.MaxValue))
+        {
+            using var stream = file.OpenReadStream(int.MaxValue);
+            using var ms = new MemoryStream();
+            await stream.CopyToAsync(ms);
+            back = $"data:{file.ContentType};base64,{Convert.ToBase64String(ms.ToArray())}";
+            await local.SetItemAsync<string>("back", back);
+            StateHasChanged();
+        }
+    }
+    private void account()
+    {
+        nav.NavigateTo("authentication/profile");
+    }
+}

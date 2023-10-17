@@ -1,0 +1,60 @@
+﻿@page "/add"
+@using Dodo.BlazorThemeSwitcher;
+@using Softon.Shared;
+@inject HttpClient client
+@inject ThemeManager TM
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager nav
+<PageTitle>Agregar</PageTitle>
+<div class="row">
+    <div class="min-vh-100 d-flex justify-content-center align-items-center">
+        <div class="flex-column p-3 w-50">
+            <div class="d-flex justify-content-center mb-2">
+                @if (string.IsNullOrEmpty(url))
+                {
+                    <MudIcon Icon="@Icons.Material.Sharp.AccountCircle" Class="icon" />
+                }
+                else
+                {
+                    <img src="https://s2.googleusercontent.com/s2/favicons?domain=@url&sz=32" class="img" width="32" />
+                }
+            </div>
+            <input class="input" @bind="name" placeholder="Nombre" />
+            <input class="input" type="url" @bind="url" placeholder="Url" />
+            <div class="d-flex justify-content-center">
+                <button class="btn" @onclick="save">Guardar</button>
+                <button class="btn ms-2" @onclick="back">Regresar</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+@code{
+    string? user, name, url;
+    string? image = "https://cdn-icons-png.flaticon.com/512/61/61205.png";
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider
+            .GetAuthenticationStateAsync();
+        user = authState.User.Identity!.Name;
+    }
+
+    private async void save()
+    {
+        var item = new AppModel
+            {
+                User = user,
+                Name = name,
+                Url = url,
+                Image = $"https://s2.googleusercontent.com/s2/favicons?domain={url}&sz=32",
+                Date = DateTime.Now
+            };
+
+        await client.PostAsJsonAsync("App",item);
+        nav.NavigateTo("");
+    }
+
+    private void back() => nav.NavigateTo("");
+}

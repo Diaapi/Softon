@@ -1,0 +1,53 @@
+﻿@media (prefers-color-scheme:dark) {
+    .flex-column {
+        background-color: rgba(0,0,0,.5);
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+    }
+
+    button {
+        background-color: white;
+        color: black;
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+    }
+
+        button:hover {
+            transition: all ease .5s;
+            background-color: #eee;
+            color: black;
+        }
+
+    .icon {
+        transform: scale(1);
+        color: white;
+        transition: 1000ms ease-in-out;
+    }
+}
+
+@media (prefers-color-scheme:light) {
+    .icon {
+        transform: scale(1);
+        color: black;
+        transition: 1000ms ease-in-out;
+    }
+
+    button {
+        background-color: black;
+        color: white;
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+    }
+
+        button:hover {
+            transition: all ease .5s;
+            background-color: #151515;
+            color: white;
+        }
+
+    .flex-column {
+        background-color: rgba(255,255,255,.5);
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+    }
+}

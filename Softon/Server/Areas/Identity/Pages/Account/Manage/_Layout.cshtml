@@ -1,0 +1,24 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout !=  null)
+    {
+        Layout = parentLayout.ToString();
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+<div class="w-100 manage overflow-hidden vh-100">
+    <header class="container-fluid navbar">
+        <a href="/" class="text-decoration-none navbar-brand">Back</a>
+    </header>
+    <div class="m-1 vh-100">
+        <partial name="_ManageNav" />
+        <div class="m-3">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

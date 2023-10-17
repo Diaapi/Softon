@@ -1,0 +1,106 @@
+﻿@media screen and (max-width:60px) {
+    h1 {
+        display: flex;
+        text-align: center;
+    }
+}
+
+@media (prefers-color-scheme:dark) {
+    .box {
+        padding: 10px;
+        margin-right: auto;
+        margin-left: auto;
+        border-radius: 10px;
+        background-color: rgba(0,0,0,.8);
+        backdrop-filter: blur(5px);
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+    }
+
+    .search {
+        width: 50%;
+        margin-top: 10px;
+        display: flex;
+        background-color: rgba(0,0,0,.8);
+        backdrop-filter: blur(5px);
+        padding: 10px;
+        border-radius: 5px;
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+    }
+
+        .search input {
+            border: none;
+            box-shadow: none;
+            background-color: transparent;
+            outline: none;
+            color: white;
+        }
+
+            .search input::placeholder {
+                color: #eee;
+            }
+
+    h1 {
+        color: white;
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+    }
+
+    .menu {
+        background-color: black;
+        color: white;
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+    }
+}
+
+@media (prefers-color-scheme:light) {
+    .box {
+        padding: 10px;
+        margin-right: auto;
+        margin-left: auto;
+        border-radius: 10px;
+        background-color: rgba(255,255,255,.8);
+        backdrop-filter: blur(5px);
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+    }
+
+    .search {
+        width: 50%;
+        margin-top: 10px;
+        display: flex;
+        background-color: rgba(255,255,255,.8);
+        backdrop-filter: blur(5px);
+        padding: 10px;
+        border-radius: 5px;
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+    }
+
+        .search input {
+            border: none;
+            box-shadow: none;
+            background-color: transparent;
+            outline: none;
+            color: black;
+        }
+
+            .search input::placeholder {
+                color: #151515;
+            }
+
+    h1 {
+        color: white;
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+    }
+
+    .menu {
+        background-color: white;
+        color: black;
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+    }
+}

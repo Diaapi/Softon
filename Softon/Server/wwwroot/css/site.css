@@ -1,0 +1,377 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\
+for details on configuring this project to bundle and minify static web assets. */
+
+body {
+    background-color: canvas;
+    color: canvastext;
+}
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a {
+  color: #0077cc;
+}
+
+.form-control:focus {
+    border-color: #0077cc;
+    box-shadow: 0 0 0 0.2rem #0077cc;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.btn-link.nav-link:focus {
+  outline: black auto 1px;
+}
+
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.container {
+  max-width: 960px;
+}
+
+.pricing-header {
+  max-width: 700px;
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+@media (prefers-color-scheme:dark) {
+    .min-vh-100 {
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+        background-color: black;
+        color: white;
+    }
+
+    body .navbar {
+        background-color: black;
+    }
+
+    body .nav-link:hover {
+        border: none;
+    }
+
+    body .nav-link a {
+        color: white;
+    }
+
+    body .navbar {
+        color: white;
+    }
+
+    .login-logout-card a {
+        color: white;
+    }
+
+        .login-logout-card a:hover {
+            transition: all ease .5s;
+            border: none;
+            color: gray;
+        }
+
+    a {
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+        color: white;
+    }
+
+    label, span {
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+        color: white;
+    }
+
+    .form-control {
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+        background-color: #151515;
+        color: white;
+        border: none;
+        padding: 25px;
+        outline: none;
+    }
+
+    body .nav-tabs > a {
+        color: white;
+    }
+
+    .form-control:focus {
+        transition: all ease .5s;
+        background-color: #353535;
+    }
+
+    .nav {
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+        background-color: #222428;
+    }
+
+    .col-10 {
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+        background-color: #222428;
+    }
+
+    body .nav-item {
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+        background-color: #222428;
+        color: white;
+        border: none;
+    }
+
+        body .nav-item:active {
+            background-color: #454545;
+        }
+
+    body .manage {
+        background-color: black;
+    }
+
+    body button {
+        background-color: transparent;
+        color: white;
+    }
+
+    .card-body {
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+        background-color: #222428;
+    }
+
+    .login-logout-card {
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+        background-color: #222428;
+    }
+
+    .btn {
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+        background-color: white;
+        color: black;
+    }
+
+        .btn:hover {
+            background-color: #eee;
+            color: black;
+            transition: all ease .5s;
+        }
+
+    .nav-tabs > a {
+        color: white;
+    }
+}
+
+@media (prefers-color-scheme:light) {
+    .min-vh-100 {
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+        background-color: white;
+        color: black;
+    }
+
+    a {
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+        color: black;
+    }
+
+    body .navbar {
+        background-color: white;
+    }
+
+    body .navbar {
+        color: black;
+    }
+
+    label, span {
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+        color: black;
+    }
+
+
+    .login-logout-card a {
+        transition: all ease .5s;
+        color: black;
+    }
+
+        .login-logout-card a:hover {
+            transition: all ease .5s;
+            color: gray;
+            border: none;
+        }
+
+    .form-control {
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+        background-color: #eee;
+        color: black;
+        border: none;
+    }
+
+    body .nav-item:active {
+        background-color: #bcbcbc;
+    }
+
+    body .manage {
+        background-color: white;
+    }
+
+    body button {
+        background-color: transparent;
+        color: black;
+    }
+
+    .nav-tabs > a {
+        color: black;
+    }
+
+    .form-control:focus {
+        transition: all ease .5s;
+        background-color: #bcbcbc;
+    }
+
+    .nav {
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+        background-color: #f4f5f8;
+    }
+
+    .col-10 {
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+        background-color: #f4f5f8;
+    }
+
+    .nav-item {
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+        background-color: #f4f5f8;
+        border: none;
+    }
+
+    .card-body {
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+        background-color: #f4f5f8;
+    }
+
+    .login-logout-card {
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+        background-color: #f4f5f8;
+    }
+
+    .btn {
+        transform: scale(1);
+        transition: 1000ms ease-in-out;
+        background-color: black;
+        color: white;
+    }
+
+        .btn:hover {
+            background-color: #252525;
+            color: white;
+            transition: all ease .5s;
+        }
+
+    a {
+        color: black;
+    }
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  overflow: scroll;
+  white-space: nowrap;
+  line-height: 60px;
+}
+
+.login-logout-card {
+    width: 50%;
+}
+
+@media only screen and (max-width:600px) {
+    .login-logout-card {
+        width: 100%;
+        margin-right: 1rem;
+        margin-left: 1rem;
+    }
+}
+
+.login-logout-card .card-header {
+    padding: 0px 0px 12px 0px;
+}
+
+.login-logout-card ul {
+    margin: 0px 0px -12px 0px;
+}
+
+.login-logout-card li {
+    width: 50%;
+}
+
+.login-logout-card a {
+    font-size: 1rem;
+    text-align: center;
+    padding: 1rem;
+}
+
+.form-control {
+    box-shadow: none;
+    outline: none;
+}
+
+.login-logout-card .card-body {
+    padding: 10px 20px;
+}

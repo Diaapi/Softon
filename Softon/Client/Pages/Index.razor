@@ -1,0 +1,106 @@
+﻿@page "/"
+@using Dodo.BlazorThemeSwitcher;
+@using Microsoft.AspNetCore.Authorization;
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@using Softon.Shared
+@inject IDialogService dialog
+@inject NavigationManager nav
+@attribute [Authorize]
+@inject HttpClient Http
+@inject AuthenticationStateProvider AuthenticationStateProvider
+<AuthorizeView>
+    <Authorized>
+        <PageTitle>@context.User.Identity!.Name</PageTitle>
+    </Authorized>
+</AuthorizeView>
+<div class="d-inline">
+    <h1 class="text-center d-lg-none pt-2">@DateTime.Now.ToString("h:mm tt")</h1>
+    <div class="d-flex justify-content-center">
+        <div class="search">
+            <RadzenButton class="bg-transparent shadow-none p-0" @onclick="@(()=>Search(search))"><i class="oi oi-magnifying-glass my-auto"></i></RadzenButton>
+            <RadzenTextBox @bind-Value="search" @bind-Value:after="@(()=>Search(search))" class="w-100 shadow-none bg-transparent text-white border-0 mx-2" Placeholder="Buscar..." />
+            <RadzenSpeechToTextButton IconColor="white" class="bg-transparent p-0 shadow-none" Change="@(args=>Search(args.Replace(".","")))" />
+        </div>
+    </div>
+    <div class="d-flex flex-wrap">
+        @if (!apps!.Any())
+        {
+            <div class="w-100 d-flex justify-content-center min-vh-100 align-items-center">
+                <h1 class="border-light rounded p-2">No Web Apps</h1>
+            </div>
+        }
+        else
+        {
+            @foreach (var item in apps!)
+            {
+                <MudMenu PositionAtCursor="true">
+                    <ActivatorContent>
+                        <div class="d-flex flex-column m-2">
+                            <div class="box">
+                                <img src="@item.Image" class="mx-auto" width="32" height="32" />
+                            </div>
+                            <p class="text-white mt-1">@item.Name</p>
+                        </div>
+                    </ActivatorContent>
+                    <ChildContent>
+                        <MudMenuItem Class="menu" OnClick="@(()=>open(item))" Icon="@Icons.Material.Filled.OpenInNew">Abrir Aqui</MudMenuItem>
+                        <MudMenuItem Class="menu" Href="@item.Url" Target="_blank" Icon="@Icons.Material.Filled.OpenInBrowser"> Abrir por web</MudMenuItem>
+                        <MudMenuItem Class="menu" Icon="@Icons.Material.Filled.Delete" OnClick="@(()=>delete(item.Id))" IconColor="Color.Error" Style="color:red;">Eliminar</MudMenuItem>
+                    </ChildContent>
+                </MudMenu>
+            }
+        }
+    </div>
+</div>
+
+@code {
+    private List<AppModel>? apps = new List<AppModel>();
+    string search = "";
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var authState = await AuthenticationStateProvider
+            .GetAuthenticationStateAsync();
+            var user = authState.User;
+            apps = await Http.GetFromJsonAsync<List<AppModel>>("App/" + user.Identity!.Name);
+            StateHasChanged();
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+
+    private async void Search(string searching)
+    {
+        if (string.IsNullOrEmpty(searching))
+        {
+            await OnInitializedAsync();
+            StateHasChanged();
+        }
+        else
+        {
+            apps = await Http.GetFromJsonAsync<List<AppModel>>("App/Search?search=" + searching);
+            Console.WriteLine(searching);
+            StateHasChanged();
+        }
+    }
+
+    private async void delete(int id)
+    {
+        await Http.DeleteAsync("App/" + id);
+        await OnInitializedAsync();
+        StateHasChanged();
+
+    }
+
+    private async void open(AppModel app)
+    {
+        var parameter = new DialogParameters<Preview>();
+        parameter.Add(x => x.url, app.Url);
+        var opt = new DialogOptions { FullScreen = true, CloseButton = true, CloseOnEscapeKey = true };
+        await dialog.ShowAsync<Preview>(app.Name, parameter, opt);
+    }
+}
+

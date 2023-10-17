@@ -1,0 +1,63 @@
+﻿@using Dodo.BlazorThemeSwitcher;
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+@inject ThemeManager TM
+@inject IDialogService Dialog
+@inject NavigationManager Navigation
+<div class="tabbar">
+    <AuthorizeView>
+        <Authorized>
+            <div class="nav-menu">
+                <button title="Add" @onclick="OpenDialog">
+                    <img class="icon" style="width:24px;" src="Logo.png" />
+                    <span>Home</span>
+                </button>
+                <a href="add" title="Add">
+                    <MudIcon Icon="@Icons.Material.Filled.Add" Class="icon"></MudIcon>
+                    <span>Add</span>
+                </a>
+                <button @onclick="BeginLogOut" title="Logout">
+                    <MudIcon Icon="@Icons.Material.Filled.Logout" Class="icon"></MudIcon>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </Authorized>
+        <NotAuthorized>
+            <div class="nav-menu">
+                <a href="authentication/register" title="Register">
+                    <MudIcon Icon="@Icons.Material.Filled.Create" Class="icon"></MudIcon>
+                    <span>Register</span>
+                </a>
+                <a href="authentication/login" title="Login">
+                    <MudIcon Icon="@Icons.Material.Filled.Login" Class="icon"></MudIcon>
+                    <span>Login</span>
+                </a>
+            </div>
+        </NotAuthorized>
+    </AuthorizeView>
+    <div class="nav-notify">
+        <p>@DateTime.Now.ToString("dd/MM/yyyy h:mm tt")</p>
+        <!--<a title="Noticias">
+            <MudIcon Icon="@Icons.Material.Filled.Newspaper" Class="icon"></MudIcon>
+            <span>News</span>
+        </a>-->
+    </div>
+</div>
+@code {
+    private void BeginLogOut()
+    {
+        Navigation.NavigateToLogout("authentication/logout");
+    }
+
+    private void OpenDialog()
+    {
+        var option = new DialogOptions { CloseButton = true };
+        Dialog.Show<Pages.FetchData>("Menu", option);
+    }
+
+    private void OpenAdd()
+    {
+        var option = new DialogOptions { CloseButton = true };
+        Dialog.Show<Pages.Counter>("Add", option);
+    }
+}
+
